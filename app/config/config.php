@@ -2,7 +2,7 @@
 
 return 	[
 	'app'		=>	[
-		'baseurl'	=>	'http://localhost/sportapp/'
+		'baseUrl'	=>	'http://localhost/sportapp/'
 	],
 	'database'	=>	[
 		'adapter'	=>	'Mysql',

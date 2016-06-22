@@ -1,6 +1,6 @@
 <?php
 
-namespace Sport\Auth;
+namespace Sport\News;
 
 use Phalcon\Loader;
 use Phalcon\Mvc\Dispatcher;
@@ -14,7 +14,7 @@ class Module
 		$loader = new Loader();
 
 		$loader->registerNamespaces([
-			'Sport\Auth'	=>	APP_PATH . 'app/modules/auth/classes/',
+			'Sport\News'	=>	APP_PATH . 'app/modules/auth/classes/',
 			'Sport\Common'	=>	APP_PATH . 'app/common/classes'
 		]);
 
@@ -26,7 +26,7 @@ class Module
 		$di->set('dispatcher', function(){
 			$dispatcher = new Dispatcher();
 
-			$dispatcher->setDefaultNamespace('Sport\Auth\Controllers');
+			$dispatcher->setDefaultNamespace('Sport\News\Controllers');
 
 			return $dispatcher;
 		});
@@ -34,7 +34,7 @@ class Module
 		$di->set('view', function(){
 			$view = new View();
 
-			$view->setViewsDir(APP_PATH .'app/modules/auth/views/');
+			$view->setViewsDir(APP_PATH .'app/modules/news/views/');
 			$view->setLayoutsDir(APP_PATH . 'app/common/views/template/');
 			$view->setTemplateAfter('base');
 

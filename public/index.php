@@ -35,7 +35,8 @@ class Application extends BaseApplication
 		$loader->registerNamespaces(array(
 			'Sport\Library'	=>	APP_PATH . 'app/library/',
 			'Sport\Common'	=>	APP_PATH . 'app/common/classes/',
-			'Sport\Auth'	=>	APP_PATH . 'app/modules/auth/classes'
+			'Sport\Auth'	=>	APP_PATH . 'app/modules/auth/classes',
+			'Sport\News'	=>	APP_PATH . 'app/modules/news/classes'
 		));
 
 		//	add config to $di => dependancy injection
@@ -112,18 +113,20 @@ class Application extends BaseApplication
 			$assets = new \Phalcon\Assets\Manager();
 			$assets
 				->collection('js')
+				->addJs('semantic/semantic.min.js')
 				;
 			$assets
 				->collection('css')
 				->addCss('semantic/semantic.min.css')
+				->addCss('css/custom.css')
 			;
 
 			return $assets;
 		});
 
-		$di->set('url', function(){
+		$di->set('url', function() use ($config){
 			$url = new \Phalcon\Mvc\Url();
-			$url->setBaseUri($config->app->base_url );
+			$url->setBaseUri($config->app->baseUrl );
 			return $url;
 		});
 
@@ -170,6 +173,10 @@ class Application extends BaseApplication
 				'auth'	=>	[
 					'className'	=>	'Sport\Auth\Module',
 					'path'		=>	APP_PATH . 'app/modules/auth/Module.php'
+				],
+				'news'	=>	[
+					'className'	=>	'Sport\News\Module',
+					'path'		=>	APP_PATH . 'app/modules/news/Module.php'
 				]
 			]);
 

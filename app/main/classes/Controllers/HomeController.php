@@ -8,7 +8,6 @@ class HomeController extends Controller
 {
 	public function indexAction()
 	{
-		// $this->view->disable();
-		// echo ' Welcome Main Module Controller Home Action Index ';
+		return $this->response->redirect('news');
 	}
 }

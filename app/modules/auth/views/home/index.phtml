@@ -1,0 +1,18 @@
+<div class="whole_page">
+	<div class = "centered_div">
+		<img class="ui medium circular image logo" src="<?= $this->url->get('img/arsenal_logo.png'); ?>">
+		<form class = "ui form" method="POST" action = "<?= @$this->url->get('auth/signin'); ?>">
+			<div class = "field">
+				<label>Username</label>
+				<input type = "text" name = "username"  />
+			</div>
+			<div class = "field">
+				<label>Password</label>
+				<input type = "password" name = "password"  />
+			</div>
+
+			<button class="negative fluid ui button">Submit</button>
+
+		</form>
+	</div>
+</div>
