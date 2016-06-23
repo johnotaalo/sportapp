@@ -23,7 +23,7 @@ div.centered_div
 	transform: translate(-50%, -50%);
 }
 
-div.centered_div label
+div.centered_div label, div.centered_div input
 {
 	text-align: center;
 }
@@ -32,4 +32,27 @@ div.centered_div .logo
 {
 	display: block;
     margin: 0 auto;
+    width: 100px;
+}
+
+div.centered_div .banner img
+{
+	width: 100%;
+}
+
+div.centered_div .banner .banner_head
+{
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+div.centered_div .banner .title-holder
+{
+	border-left: 5px solid red;
+}
+
+div.custom-container
+{
+	padding: 55px 10px 10px 10px !important;
 }

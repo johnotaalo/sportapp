@@ -4,8 +4,21 @@
 	<title></title>
 	<?php $this->assets->outputCss('css'); ?>
 </head>
-<body>
-	<?php print $this->getContent(); ?>
+<body class = "ui basic">
+	<?php if($this->getContent()) { ?>
+		<?php print $this->getContent(); ?>
+	<?php } else { ?>
+		<?= @$content; ?>
+	<?php } ?>
 	<?php $this->assets->outputJs('js'); ?>
+
+	<?php
+
+		$di = $this->di->getDefault();
+		$commonv = $di->get("commonv");
+		// then in my view I do the following
+		$commonv->partial('javascript');
+
+	?>
 </body>
 </html>

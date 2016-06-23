@@ -8,7 +8,7 @@ return 	[
 		'adapter'	=>	'Mysql',
 		'host'		=>	'localhost',
 		'username'	=>	'root',
-		'password'	=>	'root',
+		'password'	=>	'',
 		'name'		=>	'sportapp'
 	]
 ];

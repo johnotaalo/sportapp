@@ -33,10 +33,11 @@ class Application extends BaseApplication
 		//register namespaces here
 
 		$loader->registerNamespaces(array(
-			'Sport\Library'	=>	APP_PATH . 'app/library/',
-			'Sport\Common'	=>	APP_PATH . 'app/common/classes/',
-			'Sport\Auth'	=>	APP_PATH . 'app/modules/auth/classes',
-			'Sport\News'	=>	APP_PATH . 'app/modules/news/classes'
+			'Sport\Library'		=>	APP_PATH . 'app/library/',
+			'Sport\Common'		=>	APP_PATH . 'app/common/classes/',
+			'Sport\Auth'		=>	APP_PATH . 'app/modules/auth/classes',
+			'Sport\News'		=>	APP_PATH . 'app/modules/news/classes',
+			'Sport\Dashboard'	=>	APP_PATH . 'app/modules/dashboard/classes'
 		));
 
 		//	add config to $di => dependancy injection
@@ -63,8 +64,11 @@ class Application extends BaseApplication
 
 		$di->set('view', function(){
 			$view = new View();
+			$view->setLayoutsDir(APP_PATH . 'app/common/views/template/');
+			$view->setTemplateAfter('base');
+
 			return $view;
-		}, true);
+		});
 
 		$di->set('commonv', function(){
 			$view = new View();
@@ -113,6 +117,7 @@ class Application extends BaseApplication
 			$assets = new \Phalcon\Assets\Manager();
 			$assets
 				->collection('js')
+				->addJs('https://code.jquery.com/jquery-2.2.4.min.js', TRUE)
 				->addJs('semantic/semantic.min.js')
 				;
 			$assets
@@ -130,10 +135,6 @@ class Application extends BaseApplication
 			return $url;
 		});
 
-		$di->set('flash', function(){
-			return new FlashDirect();
-		});
-
 		$di->setShared('session', function(){
 			$session = new SessionAdapter();
 
@@ -141,6 +142,16 @@ class Application extends BaseApplication
 
 			return $session;
 		});
+
+		$di->set('flash', function(){
+			return new FlashDirect([
+				'error'		=>	'ui negative message',
+				'success'	=>	'ui positive message',
+				'notice'	=>	'ui info message',
+				'warning'	=>	'ui warning message'
+			]);
+		});
+
 
 		$di->set('db', function() use ($config){
 			$db = new MysqlAdapater([
@@ -166,17 +177,21 @@ class Application extends BaseApplication
 			$this->registerServices();
 
 			$this->registerModules([
-				'main' 	=> [
+				'main' 		=> [
 					'className' => 'Sport\Main\Module',
 					'path'		=>	APP_PATH . 'app/main/Module.php'
 				],
-				'auth'	=>	[
+				'auth'		=>	[
 					'className'	=>	'Sport\Auth\Module',
 					'path'		=>	APP_PATH . 'app/modules/auth/Module.php'
 				],
-				'news'	=>	[
+				'news'		=>	[
 					'className'	=>	'Sport\News\Module',
 					'path'		=>	APP_PATH . 'app/modules/news/Module.php'
+				],
+				'dashboard'	=>	[
+					'className'	=>	'Sport\Dashboard\Module',
+					'path'		=>	APP_PATH . 'app/modules/dashboard/Module.php'
 				]
 			]);
 
